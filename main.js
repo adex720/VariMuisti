@@ -31,12 +31,15 @@ function getButtonElement(id) {
     return document.getElementById('vari' + id);
 }
 
-function highlightButton(id) {
-    let element = getButtonElement(id);
-    let color = getButtonColor(id); // Can't be loaded from style becuase it is set to while on highlight
+function highlightButton(id, color, time) {
+    if (color == null || color == undefined) color = '#ffffff';
+    if (time == null || time == undefined) time = 200;
 
-    changeButtonColor(element, '#ffffff');
-    setTimeout(() => changeButtonColor(element, color), 200);
+    let element = getButtonElement(id);
+    let originalColor = getButtonColor(id); // Can't be loaded from style becuase it is set to while on highlight
+
+    changeButtonColor(element, color);
+    setTimeout(() => changeButtonColor(element, originalColor), time);
 }
 
 function changeButtonColor(button, color) {
@@ -65,11 +68,16 @@ async function startRound() {
     afterSequencePlayed();
 }
 
-function endGame() {
+function endGame(id) {
     play = false;
-    alert('Pisteet: ' + (colors - 1));
 
-    startGame();
+    highlightButton(id, '#880000', 500);
+    highlightButton(sequence[correct] + 1, '#008800', 500);
+
+    setTimeout(() => {
+        alert('Pisteet: ' + (colors - 1));
+        startGame();
+    }, 500);
 }
 
 async function playSequence() {
@@ -102,7 +110,7 @@ function buttonPressed(id) {
     if (!play) return;
 
     if (sequence[correct] + 1 != id) {
-        endGame();
+        endGame(id);
         return;
     }
 

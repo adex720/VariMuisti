@@ -6,7 +6,6 @@ function isMobile() {
 }
 ?>
 
-
 :root {
     --width: min(calc(100vw - 4rem), calc(100vh - 4rem), 58rem);
 }
