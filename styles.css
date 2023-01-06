@@ -1,0 +1,61 @@
+:root {
+    --width: min(calc(100vw - 5rem), 48rem);
+}
+
+@media screen and (max-width: 53rem) {
+    :root {
+        --margin: 2rem;
+    }
+}
+
+@media screen and (min-width: 57rem) {
+    :root {
+        --margin: 4rem;
+    }
+}
+
+@media screen and (max-width: 57rem) and (min-width: 53rem) {
+    :root {
+        --margin: calc(50vw - 24.5rem);
+    }
+}
+
+body {
+    background-color: #888888;
+}
+
+#varit {
+    margin: var(--margin);
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: calc(0.08 * var(--width));
+
+    width: var(--width);
+}
+
+.nappi {
+    border-radius: calc(0.23 * var(--width));
+
+    width: calc(0.46 * var(--width));
+    height: calc(0.46 * var(--width));
+
+    cursor: pointer;
+}
+
+#vari1 {
+    background-color: #ff0000;
+}
+
+#vari2 {
+    background-color: #00ff00;
+}
+
+#vari3 {
+    background-color: #0000ff;
+}
+
+#vari4 {
+    background-color: #ffff00;
+}
