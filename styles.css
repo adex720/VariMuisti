@@ -1,22 +1,22 @@
 :root {
-    --width: min(calc(100vw - 5rem), 48rem);
+    --width: min(calc(100vw - 4rem), calc(100vh - 4rem), 58rem);
 }
 
-@media screen and (max-width: 53rem) {
+@media screen and (max-width: 62rem) {
     :root {
         --margin: 2rem;
     }
 }
 
-@media screen and (min-width: 57rem) {
+@media screen and (min-width: 66rem) {
     :root {
         --margin: 4rem;
     }
 }
 
-@media screen and (max-width: 57rem) and (min-width: 53rem) {
+@media screen and (max-width: 66rem) and (min-width: 62rem) {
     :root {
-        --margin: calc(50vw - 24.5rem);
+        --margin: calc(50vw - 29rem);
     }
 }
 
