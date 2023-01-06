@@ -2,9 +2,13 @@
 const buttonCount = 4;
 const buttonColors = [];
 
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 function init() {
     loadColors();
     addEventListeners();
+
+    startGame();
 }
 
 function loadColors() {
@@ -20,7 +24,7 @@ function addEventListeners() {
 }
 
 function getButtonColor(id) {
-    return buttonColors[id-1];
+    return buttonColors[id - 1];
 }
 
 function getButtonElement(id) {
@@ -39,9 +43,75 @@ function changeButtonColor(button, color) {
     button.style.setProperty('background-color', color);
 }
 
-function buttonPressed(id) {
-    highlightButton(id);
+let sequence;
+let colors;
+
+let correct;
+let play;
+
+function startGame() {
+    colors = 0;
+    sequence = [];
+    correct = 0;
+
+    startRound();
 }
 
+async function startRound() {
+    play = false;
+    addColor();
+
+    await playSequence();
+    afterSequencePlayed();
+}
+
+function endGame() {
+    play = false;
+    alert('Pisteet: ' + (colors - 1));
+
+    startGame();
+}
+
+async function playSequence() {
+    for (let i = 0; i < colors; i++) {
+        await delay(250);
+        highlightButton(sequence[i] + 1);
+    }
+}
+
+function addColor() {
+    sequence[colors] = getNextColor();
+    colors++;
+}
+
+function getNextColor() {
+    if (colors == 0)
+        return Math.floor(Math.random() * 4);
+
+    let id = Math.floor(Math.random() * 3); // Prevent same color from occuring twice.
+    if (id >= sequence[colors - 1]) id++;
+    return id;
+}
+
+function afterSequencePlayed() {
+    play = true;
+    correct = 0;
+}
+
+function buttonPressed(id) {
+    if (!play) return;
+
+    if (sequence[correct] + 1 != id) {
+        endGame();
+        return;
+    }
+
+    highlightButton(id);
+    correct++;
+
+    if (correct == colors) {
+        startRound();
+    }
+}
 
 init();
