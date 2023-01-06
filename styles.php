@@ -1,3 +1,12 @@
+<?php
+header("Content-type: text/css; charset: UTF-8");
+
+function isMobile() {
+    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+?>
+
+
 :root {
     --width: min(calc(100vw - 4rem), calc(100vh - 4rem), 58rem);
 }
@@ -41,7 +50,11 @@ body {
     width: calc(0.46 * var(--width));
     height: calc(0.46 * var(--width));
 
-    cursor: pointer;
+    <?php
+        if (!isMobile()) {
+            echo "cursor: pointer;";
+        }
+    ?>
 }
 
 #vari1 {
