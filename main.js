@@ -8,7 +8,7 @@ function init() {
     loadColors();
     addEventListeners();
 
-    startGame();
+    setTimeout(() => startGame(), 1000);
 }
 
 function loadColors() {
@@ -36,7 +36,7 @@ function highlightButton(id) {
     let color = getButtonColor(id); // Can't be loaded from style becuase it is set to while on highlight
 
     changeButtonColor(element, '#ffffff');
-    setTimeout(function () { changeButtonColor(element, color); }, 200);
+    setTimeout(() => changeButtonColor(element, color), 200);
 }
 
 function changeButtonColor(button, color) {
